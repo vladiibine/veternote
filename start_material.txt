@@ -1,0 +1,18 @@
+###DOCS:::::http://neo4j.com/docs/stable/query-match.html
+
+#####~~~~~~~~Discovering the local server
+from py2neo.neo4j import ServiceRoot
+
+# of course, the port is taken from the neo4j config files
+sr1 = ServiceRoot('http://localhost:7474')
+print(sr1.graph_db)
+
+#use sr1.graph_db as the "db connection" from now onwards
+
+###~~~~~~Cypher stuff
+# MATCH me RETURN me; # select * ;
+# MATCH me RETURN me.name;   # select name;
+# MATCH (me)-[:KNOWS]->(u) RETURN me.name, u;   # ... lol
+
+## Returns all names of people with label PERSON, who have inbound connections with any entities that have a "property" named "property" with value "VALUEEE", returns those other entities, and the relationship they have to our guys
+# match (om:PERSON)<-[r]-(altom {property: "VALUEEE"}) return om.name, altom, r; 
